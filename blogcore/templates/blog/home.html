@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{username}}'s Blog</title>
+    </head>
+    <body>
+
+        <h1>Whoami?</h1>
+        <p>My name is {{username}}. I am {{age}}. I am a {{job}} engineer.</p>
+        </br>
+        <div>
+        {% for article in articles %}
+            <article>
+                <img src="{{article.img}}" alt="">
+                <h1>{{article.title}}</h1>
+                <p>{{article.description}}</p>
+            </article>
+        {% endfor %}
+        </div>
+
+    </body>
+</html>
