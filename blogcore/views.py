@@ -13,6 +13,14 @@ def home(request):
 
     return render(request, "blog/home.html", context)
 
+def detail(request, slug):
+
+    context = {
+        "article": Article.objects.get(slug=slug)
+    }
+
+    return render(request, "blog/detail.html", context)
+
 def api(request):
 
     apidata = {
