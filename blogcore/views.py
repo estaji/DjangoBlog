@@ -19,7 +19,7 @@ def detail(request, slug):
         "article": Article.objects.get(slug=slug)
     }
 
-    return render(request, "blog/detail.html", context)
+    return render(request, "blog/single.html", context)
 
 def api(request):
 
