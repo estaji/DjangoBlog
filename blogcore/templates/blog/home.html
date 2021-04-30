@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
-            <h1>Django Blog</h1>
+            <h1>وبلاگ جنگو</h1>
             <span class="subheading">A Blog maid by Django and Bootstrap</span>
           </div>
         </div>
@@ -35,6 +35,11 @@
             <p class="post-meta">نوشته شده توسط
               <a href="#">نویسنده</a>
               {{article.jpublish}}</p>
+            <div>
+              {% for cat in article.category.all %}
+                <a href="#">#{{cat.title}}</a>
+              {% endfor %}
+            </div>
           </div>
           <hr>
         {% endfor %}
