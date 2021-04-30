@@ -14,6 +14,10 @@ body {
     font-size: 14px;
 }
 
+.navbar-brand {
+    font-family: "Sahel";
+}
+
 .navbar-nav {
     margin-left: initial !important;
     margin-right: auto;
