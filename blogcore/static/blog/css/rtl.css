@@ -21,6 +21,7 @@ body {
 .navbar-nav {
     margin-left: initial !important;
     margin-right: auto;
+    font-family: "Sahel";
 }
 
 .post-meta {
@@ -29,4 +30,19 @@ body {
 
 .pager-button {
     float: left !important;
+}
+
+header.masthead .site-heading h1 {
+    font-family: "Sahel";
+    font-size: 35px;
+}
+
+.post-title {
+    font-family: "Sahel";
+    font-size: 27px !important;
+}
+
+.post-subtitle {
+    font-family: "Sahel";
+    font-size: 18px;
 }
