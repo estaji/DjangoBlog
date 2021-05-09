@@ -1,11 +1,16 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import Article, Category
 
-def home(request):
+def home(request, page=1):
+
+    articles_list = Article.objects.published()
+    paginator = Paginator(articles_list, 4)
+    articles = paginator.get_page(page)
 
     context = {
-        "articles": Article.objects.published(),
+        "articles": articles,
     }
 
     return render(request, "blog/home.html", context)
