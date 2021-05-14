@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Article, Category
 
+# Admin header change
+admin.site.site_header = "وبلاگ جنگو"
+
 def make_published(modeladmin, request, queryset):
     rows_updated = queryset.update(status='p')
     if rows_updated == 1:
