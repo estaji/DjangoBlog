@@ -19,11 +19,30 @@ def make_draft(modeladmin, request, queryset):
     modeladmin.message_user(request, "{} مقاله {}".format(rows_updated, message_bit))
 make_draft.short_description = "پیش نویس شدن مقالات انتخاب شده"
 
+def make_active(modeladmin, request, queryset):
+    rows_updated = queryset.update(status=True)
+    if rows_updated == 1:
+        message_bit = "فعال شد."
+    else:
+        message_bit = "فعال شدند."
+    modeladmin.message_user(request, "{} دسته بندی {}".format(rows_updated, message_bit))
+make_active.short_description = "فعال کردن دسته بندی های انتخاب شده"
+
+def make_deactive(modeladmin, request, queryset):
+    rows_updated = queryset.update(status=False)
+    if rows_updated == 1:
+        message_bit = "غیرفعال شد."
+    else:
+        message_bit = "غیرفعال شدند."
+    modeladmin.message_user(request, "{} دسته بندی {}".format(rows_updated, message_bit))
+make_deactive.short_description = "غیر فعال کردن دسته بندی های انتخاب شده"
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('position', 'title','slug', 'parent','status')
     list_filter = (['status'])
     search_fields = ('title','slug')
     prepopulated_fields = {'slug': ('title',)}
+    actions = [make_active, make_deactive]
 
 admin.site.register(Category, CategoryAdmin)
 
