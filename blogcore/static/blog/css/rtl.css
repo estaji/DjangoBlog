@@ -14,8 +14,12 @@ body {
     font-size: 14px;
 }
 
-.navbar-brand {
+.navbar-brand .subheading {
     font-family: "Sahel";
+}
+
+.subheading {
+    font-family: "Sahel" !important;
 }
 
 .navbar-nav {
