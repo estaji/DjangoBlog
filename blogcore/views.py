@@ -1,19 +1,25 @@
+from django.views.generic import ListView
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import Article, Category
 
-def home(request, page=1):
+#def home(request, page=1):
+#
+#    articles_list = Article.objects.published()
+#    paginator = Paginator(articles_list, 4)
+#    articles = paginator.get_page(page)
+#
+#    context = {
+#        "articles": articles,
+#    }
 
-    articles_list = Article.objects.published()
-    paginator = Paginator(articles_list, 4)
-    articles = paginator.get_page(page)
-
-    context = {
-        "articles": articles,
-    }
-
-    return render(request, "blog/home.html", context)
+#    return render(request, "blog/home.html", context)
+class ArticleList(ListView):
+    queryset = Article.objects.published()
+    template_name = "blog/home.html"
+    context_object_name = "articles"
+    paginate_by = 4
 
 def detail(request, slug):
 
