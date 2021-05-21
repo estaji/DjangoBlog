@@ -17,7 +17,7 @@ from .models import Article, Category
 #    return render(request, "blog/home.html", context)
 class ArticleList(ListView):
     queryset = Article.objects.published()
-    template_name = "blog/home.html"
+    template_name = "blog/article.html"
     context_object_name = "articles"
     paginate_by = 4
 
