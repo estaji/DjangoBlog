@@ -1,6 +1,8 @@
 {% extends 'blog/list.html' %}
 
-{% block header %}{% endblock %}
+{% block header %}
+    <h3 class="alert alert-primary text-center">نویسنده: {{author.get_full_name}}</h3>
+{% endblock %}
 
 {% block ifarticle %}
     {% for article in object_list %}
@@ -28,12 +30,12 @@
 
 {% block previous_page_url %}
     {% if page_obj.has_previous %}
-        <a class="btn btn-primary float-right ml-3" href="{% url 'blog:home' page_obj.previous_page_number %}">پست های جدید تر &rarr;</a>
+        <a class="btn btn-primary float-right ml-3" href="{% url 'blog:author' author.username page_obj.previous_page_number %}">پست های جدید تر &rarr;</a>
     {% endif %}
 {% endblock %}
 
 {% block next_page_url %}
     {% if page_obj.has_next %}
-        <a class="btn btn-primary float-right" href="{% url 'blog:home' page_obj.next_page_number %}">پست های قدیمی تر &larr;</a>
+        <a class="btn btn-primary float-right" href="{% url 'blog:author' author.username page_obj.next_page_number %}">پست های قدیمی تر &larr;</a>
     {% endif %}
 {% endblock %}

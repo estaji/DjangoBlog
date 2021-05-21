@@ -14,7 +14,7 @@ body {
     font-size: 14px;
 }
 
-.navbar-brand .subheading {
+.navbar-brand {
     font-family: "Sahel";
 }
 
@@ -49,6 +49,14 @@ header.masthead .site-heading h1 {
 .post-subtitle {
     font-family: "Sahel";
     font-size: 18px;
+}
+
+.alert {
+    font-family: 'Sahel' !important;
+}
+
+.btn {
+    font-family: 'Sahel' !important;
 }
 
 .nav ul {

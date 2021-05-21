@@ -4,6 +4,30 @@
     <h3 class="alert alert-primary text-center">دسته بندی: {{category.title}}</h3>
 {% endblock %}
 
+{% block ifarticle %}
+    {% for article in articles %}
+        <div class="post-preview">
+            <a href="{% url 'blog:detail' article.slug %}">
+              <h2 class="post-title">
+                {{article.title}}
+              </h2>
+              <h3 class="post-subtitle">
+                {{article.description|truncatewords:30}}
+              </h3>
+            </a>
+            <p class="post-meta">نوشته شده توسط
+              <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
+              {{article.jpublish}}</p>
+            <div>
+              {% for cat in article.category.active %}
+                <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+              {% endfor %}
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
+
 {% block previous_page_url %}
     {% if articles.has_previous %}
         <a class="btn btn-primary float-right ml-3" href="{% url 'blog:category' category.slug articles.previous_page_number %}">پست های جدید تر &rarr;</a>

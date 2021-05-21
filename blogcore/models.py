@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.html import format_html
 from django.utils import timezone
 from extensions.utils import jalali_converter
@@ -42,6 +43,7 @@ class Article(models.Model):
 
     title = models.CharField(max_length=200, verbose_name="عنوان مقاله")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="آدرس مقاله")
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
     category = models.ManyToManyField(Category, verbose_name="دسته بندی", related_name="articles")
     description = models.TextField(verbose_name="محتوا")
     thumbnail = models.ImageField(upload_to="images", verbose_name="تصویر مقاله")
