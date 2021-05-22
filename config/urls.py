@@ -6,6 +6,7 @@ from django.conf.urls.static import static # just for debug mode without a web s
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogcore.urls')),
+    path('account/', include('account.urls')),
 ]
 
 # just for debug mode without a web server
