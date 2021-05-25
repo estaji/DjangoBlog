@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blogcore.apps.BlogcoreConfig',
     'account.apps.AccountConfig',
     'extensions',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
