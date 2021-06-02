@@ -4,9 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from blogcore.models import Article
 
-@login_required
-def home(request):
-    return render(request, 'registration/home.html')
+#@login_required
+#def home(request):
+#    return render(request, 'registration/home.html')
 
 
 class ArticleList(LoginRequiredMixin, ListView):
