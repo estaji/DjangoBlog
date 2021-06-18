@@ -1,8 +1,19 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin, FormValidMixin, AuthorAccessMixin
-from django.views.generic import ListView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from .mixins import (
+    FieldMixin,
+    FormValidMixin,
+    AuthorAccessMixin,
+    SuperUserAccessMixin
+)
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 from blogcore.models import Article, Category
 
 #@login_required
@@ -27,3 +38,8 @@ class ArticleCreate(LoginRequiredMixin, FormValidMixin, FieldMixin, CreateView):
 class ArticleUpdate(AuthorAccessMixin, FormValidMixin, FieldMixin, UpdateView):
     model = Article
     template_name = "registration/article-create-update.html"
+
+class ArticleDelete(SuperUserAccessMixin, DeleteView):
+    model = Article
+    success_url = reverse_lazy('account:home')
+    template_name = "registration/article_confirm_delete.html"
