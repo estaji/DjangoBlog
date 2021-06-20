@@ -41,7 +41,7 @@
                             <td>
                               {% if article.status == 'p' %}
                                 <span class="badge badge-success">منتشر شده</span>
-                                <a target="_blank" class="badge badge-primary" href="{% url 'blog:detail' article.slug %}">نمایش مقالات در سایت</a>
+                                <a target="_blank" class="badge badge-primary" href="{% url 'blog:detail' article.slug %}">نمایش مقاله در سایت</a>
                               {% else %}
                                 <span class="badge badge-danger">پیش نویس</span>
                               {% endif %}

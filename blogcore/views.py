@@ -2,6 +2,7 @@ from django.views.generic import ListView#, DetailView
 from account.models import User
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
+#from account.mixins import AuthorAccessMixin
 from django.http import JsonResponse
 from .models import Article, Category
 
@@ -34,7 +35,13 @@ def detail(request, slug):
 #    
 #    def get_object(self):
 #        slug = self.kwargs.get('slug')
-#        return get_object_or_404(Article, slug=slug, status="p")
+#        return get_object_or_404(Article.objects.published(), slug=slug)
+
+#class ArticlePreview(AuthorAccessMixin, DetailView):
+#    
+#    def get_object(self):
+#        pk = self.kwargs.get('pk')
+#        return get_object_or_404(Article, pk=pk)
 
 def category(request, slug, page=1):
 
