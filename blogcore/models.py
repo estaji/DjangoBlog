@@ -40,6 +40,8 @@ class Article(models.Model):
     STATUS_CHOICES = (
         ('d', 'پیش نویس'),
         ('p', 'منتشر شده'),
+        ('i', 'درحال بررسی'),
+        ('b', 'برگشت داده شده'),
     )
 
     title = models.CharField(max_length=200, verbose_name="عنوان مقاله")
