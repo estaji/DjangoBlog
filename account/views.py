@@ -9,6 +9,7 @@ from .mixins import (
     FieldMixin,
     FormValidMixin,
     AuthorAccessMixin,
+    AuthorsAccessMixin,
     SuperUserAccessMixin
 )
 from django.views.generic import (
@@ -24,7 +25,7 @@ from blogcore.models import Article, Category
 #    return render(request, 'registration/home.html')
 
 
-class ArticleList(LoginRequiredMixin, ListView):
+class ArticleList(AuthorsAccessMixin, ListView):
     #queryset = Article.objects.all()
     template_name = "registration/home.html"
 
@@ -34,7 +35,7 @@ class ArticleList(LoginRequiredMixin, ListView):
         else:
             return Article.objects.filter(author=self.request.user)
     
-class ArticleCreate(LoginRequiredMixin, FormValidMixin, FieldMixin, CreateView):
+class ArticleCreate(AuthorsAccessMixin, FormValidMixin, FieldMixin, CreateView):
     model = Article
     template_name = "registration/article-create-update.html"
 

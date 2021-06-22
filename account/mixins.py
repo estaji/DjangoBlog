@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from blogcore.models import Article
 
 class FieldMixin():
@@ -29,7 +29,7 @@ class FormValidMixin():
         return super().form_valid(form)
 
 class AuthorAccessMixin():
-    def dispatch(self, request, pk, *args, **kwargs):
+    def dispatch(self, request, pk, *args, **kwargs):   # get pk for one user
         article = get_object_or_404(Article, pk=pk)
         if article.author == request.user and article.status in ['b', 'd'] or request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
@@ -42,3 +42,10 @@ class SuperUserAccessMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("You can't visit this page :(")
+
+class AuthorsAccessMixin():
+    def dispatch(self, request, *args, **kwargs):  # use for all users
+        if request.user.is_superuser or request.user.is_author:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect("account:profile")
