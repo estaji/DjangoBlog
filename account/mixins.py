@@ -12,7 +12,7 @@ class FieldMixin():
         elif request.user.is_author:
             self.fields = [
                 "title", "slug", "category", 
-                "description", "thumbnail", "is_special", "publish"
+                "description", "thumbnail", "is_special", "publish", "status"
                 ]
         else:
             raise Http404("You can't visit this page :(")
@@ -25,7 +25,8 @@ class FormValidMixin():
         else:
             self.obj = form.save(commit=False)
             self.obj.author = self.request.user
-            self.obj.status = 'd'
+            if not self.obj.status in ['d', 'i']:
+                self.obj.status = 'd'
         return super().form_valid(form)
 
 class AuthorAccessMixin():
@@ -45,7 +46,10 @@ class SuperUserAccessMixin():
 
 class AuthorsAccessMixin():
     def dispatch(self, request, *args, **kwargs):  # use for all users
-        if request.user.is_superuser or request.user.is_author:
-            return super().dispatch(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            if request.user.is_superuser or request.user.is_author:
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                return redirect("account:profile")
         else:
-            return redirect("account:profile")
+            return redirect("account:login")
