@@ -57,7 +57,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_special = models.BooleanField(default=False, verbose_name="مقاله ویژه")
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
-    hits = models.ManyToManyField(IPAddress, blank=True, related_name="hits", verbose_name="بازدیدها")
+    hits = models.ManyToManyField(IPAddress, through="ArticleHit",blank=True, related_name="hits", verbose_name="بازدیدها")
 
     class Meta:
         verbose_name = "مقاله"
@@ -87,3 +87,7 @@ class Article(models.Model):
 
     objects = ArticleManager()
     
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)

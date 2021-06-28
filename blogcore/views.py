@@ -5,7 +5,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 #from account.mixins import AuthorAccessMixin
 from django.http import JsonResponse
-from .models import Article, Category
+from .models import Article, ArticleHit, Category
+from django.db.models import Count, Q
+from datetime import datetime, timedelta
 
 #def home(request, page=1):
 #
@@ -19,7 +21,9 @@ from .models import Article, Category
 
 #    return render(request, "blog/home.html", context)
 class ArticleList(ListView):
-    queryset = Article.objects.published()
+    #queryset = Article.objects.published()
+    last_month = datetime.today() - timedelta(days=30)
+    queryset = Article.objects.published().annotate(count=Count('hits', filter=Q(articlehit__created__gt=last_month))).order_by('-count', '-publish')[:5]
     template_name = "blog/article.html"
     context_object_name = "articles"
     paginate_by = 4
