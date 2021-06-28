@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% load static %}
+{% load base_tags %}
 
 {% block custom-header %}
 <link href="custom.css" rel="stylesheet" type="text/css">
@@ -33,6 +34,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto text-justify">
+        {% popular_articles %}
           <!-- {% if article.is_special %}
             {% if user.is_authenticated and user.is_special_user or user == article.author or user.is_superuser %}
               {{article.description|safe|linebreaks}

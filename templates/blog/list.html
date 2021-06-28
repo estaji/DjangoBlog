@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% load static %}
+{% load base_tags %}
 
 {% block main %}
   <!-- Page Header -->
@@ -24,6 +25,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
 
         {% block header %}{% endblock %}
+        {% popular_articles %}
 
         {% block ifarticle %}{% endblock %}
         <!-- Pager -->
