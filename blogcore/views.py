@@ -1,3 +1,4 @@
+from django.urls.base import set_urlconf
 from django.views.generic import ListView#, DetailView
 from account.models import User
 from django.core.paginator import Paginator
@@ -28,6 +29,11 @@ def detail(request, slug):
     context = {
         "article": get_object_or_404(Article, slug=slug, status="p"),
     }
+    
+    article = get_object_or_404(Article.objects.published(), slug=slug)
+    ip_address = request.user.ip_address
+    if ip_address not in article.hits.all():
+        article.hits.add(ip_address)
 
     return render(request, "blog/detail.html", context)
 
@@ -35,7 +41,12 @@ def detail(request, slug):
 #    
 #    def get_object(self):
 #        slug = self.kwargs.get('slug')
-#        return get_object_or_404(Article.objects.published(), slug=slug)
+#        article = get_object_or_404(Article.objects.published(), slug=slug)
+#        ip_address = self.request.user.ip_address
+#        if ip_address not in article.hits.all():
+#           article.hits.add(ip_address)
+#
+#        return article
 
 #class ArticlePreview(AuthorAccessMixin, DetailView):
 #    
