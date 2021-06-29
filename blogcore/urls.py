@@ -5,6 +5,7 @@ from .views import (
     category,
     AuthorList,
     #ArticlePreview,
+    SearchList,
     api
 )
 
@@ -18,5 +19,7 @@ urlpatterns = [
     path('category/<slug:slug>/page/<int:page>', category, name="category"),
     path('author/<slug:username>', AuthorList.as_view(), name="author"),
     path('author/<slug:username>/page/<int:page>', AuthorList.as_view(), name="author"),
+    path('search/', SearchList.as_view(), name="search"),
+    path('search/page/<int:page>', SearchList.as_view(), name="search"),
     path('api',api, name="api"),
 ]
