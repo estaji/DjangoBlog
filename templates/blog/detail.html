@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load base_tags %}
+{% load humanize %}
 
 {% block custom-header %}
 <link href="custom.css" rel="stylesheet" type="text/css">
@@ -21,7 +22,8 @@
               {% if article.is_special %}
                 <span class="badge badge-danger" style="font-size: 14px">ویژه</span>
               {% endif %}
-            <time>{{article.jpublish}}</time>
+            <!-- <time>{{article.jpublish}}</time> -->
+            <time>{{article.publish|naturaltime}}</time>
             <div>بازدیدها: {{article.hits.count}}</div>
           </div>
         </div>
